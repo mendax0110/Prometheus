@@ -15,7 +15,9 @@ public:
      * @param outputPath -> The path to the output directory
      * @return -> A unique pointer to the created ASTProcessor object
      */
-    static std::unique_ptr<ASTProcessor> createProcessor(const std::string& languageStandard, const std::string& outputPath);
+    static std::unique_ptr<ASTProcessor> createProcessor(const std::string& languageStandard,
+                                                         const std::string& outputPath,
+                                                         bool verbose, bool dryRun);
 };
 
 #endif // ASTPROCESSORFACTORY_H

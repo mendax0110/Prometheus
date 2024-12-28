@@ -2,6 +2,7 @@
 #define DRIVER_H
 
 #include <string>
+#include <vector>
 #include "ASTProcessorFactory.h"
 
 /// @brief The main driver class for the source-to-source transformation tool
@@ -14,7 +15,9 @@ public:
      * @param outputPath -> The path to the output directory
      * @param languageStandard -> The language standard to use
      */
-    Driver(const std::string& inputPath, const std::string& outputPath, const std::string& languageStandard);
+    Driver(std::string  inputPath, std::string  outputPath,
+           std::string  languageStandard, bool verbose, bool dryRun,
+           std::string  flagsFile = "");
 
     /**
      * @brief Run the transformation process
@@ -26,6 +29,9 @@ private:
     std::string inputPath;
     std::string outputPath;
     std::string languageStandard;
+    bool verbose;
+    bool dryRun;
+    std::string flagsFile;
 
     /**
      * @brief Process a single file
@@ -38,6 +44,12 @@ private:
      * @param dirPath -> The path to the directory to process
      */
     void processDirectory(const std::string& dirPath);
+
+    /**
+     * @brief Get the compile flags from the flags file
+     * @return -> A vector of strings containing the compile flags
+     */
+    std::vector<std::string> getCompileFlags();
 };
 
 #endif // DRIVER_H

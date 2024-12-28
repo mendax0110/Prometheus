@@ -15,18 +15,20 @@ public:
      * @brief Construct a new ASTProcessor object
      * @param outputPath -> The path to the output directory
      */
-    explicit ASTProcessor(std::string  outputPath, std::string  languageStandard);
+    explicit ASTProcessor(std::string outputPath, std::string languageStandard, bool verbose, bool dryRun);
 
     /**
      * @brief Process the source code
      * @param sourceCode -> The source code to process
      */
-    void process(const std::string& sourceCode);
+    void process(const std::string& sourceCode, const std::string& filePath, const std::vector<std::string>& compileArgs);
 
 private:
     std::string outputPath;
     std::string languageStandard;
     std::vector<std::unique_ptr<TransformationCommand>> commands;
+    bool verbose;
+    bool dryRun;
 
     /**
      * @brief Load the transformation commands

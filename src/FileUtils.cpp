@@ -36,3 +36,36 @@ std::vector<std::string> FileUtils::getFilesInDirectory(const std::string& dirPa
 
     return files;
 }
+
+std::vector<FileUtils::FileData> FileUtils::readFiles(const std::vector<std::string>& fileData)
+{
+    std::vector<FileData> files;
+    for (const auto& data : fileData)
+    {
+        auto bufferOrError = llvm::MemoryBuffer::getFile(data);
+        if (!bufferOrError)
+        {
+            llvm::errs() << "Error reading file: " << data << "\n";
+            continue;
+        }
+        files.emplace_back(data, bufferOrError->get()->getBuffer().str());
+    }
+    return files;
+}
+
+void FileUtils::writeFiles(const std::vector<FileData>& fileData)
+{
+    for (const auto& data : fileData)
+    {
+        std::error_code ec;
+        llvm::raw_fd_ostream outFile(data.fileName, ec, llvm::sys::fs::OpenFlags::OF_None);
+        if (!ec)
+        {
+            outFile << data.fileContents;
+        }
+        else
+        {
+            llvm::errs() << "Error writing to file: " << ec.message() << "\n";
+        }
+    }
+}

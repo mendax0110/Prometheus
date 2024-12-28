@@ -1,7 +1,6 @@
 # Prometheus
 
-Prometheus is a powerful and flexible C++ code transformation tool designed to process and modify C++ source code efficiently.
-It integrates with Clang’s AST (Abstract Syntax Tree) to identify deprecated functions and apply custom transformations.
+Prometheus is a powerful and flexible C++ code transformation tool designed to process and modify C++ source code efficiently. It integrates with Clang’s AST (Abstract Syntax Tree) to identify deprecated functions and apply custom transformations.
 
 ## Features
 
@@ -12,7 +11,7 @@ It integrates with Clang’s AST (Abstract Syntax Tree) to identify deprecated f
 - **Rewriting Code:** The program can rewrite and output transformed source code to specified directories.
 - **Easy to Use:** Simple command-line interface for seamless operation.
 
-### Build Instructions
+## Build Instructions
 
 To build and run Prometheus, follow these steps:
 
@@ -26,27 +25,43 @@ To build and run Prometheus, follow these steps:
     cd Prometheus
     ```
 
-3. **Create the Build Directory:**
+3. **Add CLI11 as a Submodule in the `external` Folder:**
+   Prometheus uses the CLI11 library for the command-line interface. You will need to add it as a Git submodule:
+    ```bash
+    git submodule add https://github.com/CLIUtils/CLI11.git external/CLI11
+    ```
+
+4. **Initialize and Clone the Submodule:**
+   After adding the submodule, initialize and clone it:
+    ```bash
+    git submodule update --init --recursive
+    ```
+
+5. **Create the Build Directory:**
     ```bash
     mkdir build
     ```
 
-4. **Change Directory to the Build Directory:**
+6. **Change Directory to the Build Directory:**
     ```bash
     cd build
     ```
 
-5. **Generate CMake Files:**
+7. **Generate CMake Files:**
     ```bash
     cmake ..
     ```
 
-6. **Build the Project:**
+8. **Build the Project:**
     ```bash
     cmake --build .
     ```
 
-### Usage
+## Usage
+
+### Command-Line Interface
+
+Prometheus can be run from the command line with several configurable options. Here's the general command format:
+
 ```bash
-./Prometheus <input_path> <output_path> -std=<c++_version>
-```
+./Prometheus --input <input_path> --output <output_path> --standard <c++_version> [options]

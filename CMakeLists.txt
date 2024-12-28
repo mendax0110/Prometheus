@@ -8,8 +8,12 @@ set(CMAKE_CXX_STANDARD 17)
 find_package(Clang REQUIRED CONFIG)
 find_package(LLVM REQUIRED CONFIG)
 
+# Add the CLI11 library
+add_subdirectory(external/CLI11)
+
 # Include Clang and LLVM directories
 include_directories(${CLANG_INCLUDE_DIRS} ${LLVM_INCLUDE_DIRS})
+include_directories(external/CLI11)
 
 # Define source files
 set(SOURCE_FILES
@@ -58,3 +62,7 @@ target_link_libraries(${PROJECT_NAME}
         clangSupport
 )
 
+# Link the CLI11 library
+target_link_libraries(${PROJECT_NAME} PRIVATE
+        CLI11
+)

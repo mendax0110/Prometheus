@@ -49,7 +49,9 @@ private:
      * @brief Get the compile flags from the flags file
      * @return -> A vector of strings containing the compile flags
      */
-    std::vector<std::string> getCompileFlags();
+    std::vector<std::string> getCompilerFlags();
+
+    static std::vector<std::string> getLinkerFlags();
 };
 
 #endif // DRIVER_H

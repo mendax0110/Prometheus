@@ -25,6 +25,7 @@ set(SOURCE_FILES
         src/Driver.cpp
         src/FileUtils.cpp
         src/ReplaceDeprecatedCommand.cpp
+        src/DeprecatedFunctionVisitor.cpp
 )
 
 # Add the include directory
